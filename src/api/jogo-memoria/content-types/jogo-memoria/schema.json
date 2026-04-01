@@ -20,12 +20,6 @@
       "relation": "oneToMany",
       "target": "api::tema-jogo-memoria.tema-jogo-memoria",
       "mappedBy": "jogo_memoria"
-    },
-    "pontuacaos": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::pontuacao.pontuacao",
-      "mappedBy": "jogo_memorias"
     }
   }
 }

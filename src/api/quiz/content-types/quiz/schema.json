@@ -20,12 +20,6 @@
       "relation": "oneToMany",
       "target": "api::pergunta.pergunta",
       "mappedBy": "quiz"
-    },
-    "pontuacao": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::pontuacao.pontuacao",
-      "mappedBy": "quiz"
     }
   }
 }

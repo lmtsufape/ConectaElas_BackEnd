@@ -29,7 +29,7 @@ export default {
 
           const decoded = jwt.verify(
             token,
-            process.env.JWT_SECRET
+            process.env.JWT_SECRET,
           ) as JwtPayload;
 
           if (!decoded || typeof decoded !== "object" || !decoded.id) {
@@ -40,7 +40,7 @@ export default {
 
           const userId = decoded.id;
           console.log(
-            `✅ Usuário autenticado (${userId}) conectado: ${socket.id}`
+            `✅ Usuário autenticado (${userId}) conectado: ${socket.id}`,
           );
 
           const userStored = await strapi.db
@@ -89,12 +89,12 @@ export default {
           });
 
           console.log(
-            `✅ Socket ID (${socket.id}) salvo no protocolo ${ProtocoloID}`
+            `✅ Socket ID (${socket.id}) salvo no protocolo ${ProtocoloID}`,
           );
           socket.join(ProtocoloID);
           io.to(ProtocoloID).emit(
             "user_connected",
-            socket.data.userStored.username
+            socket.data.userStored.username,
           );
           const mensagensParaAtualizar = await strapi.db
             .query("api::mensagem.mensagem")
@@ -123,7 +123,7 @@ export default {
         } catch (error) {
           console.error(
             "❌ Erro ao associar usuário ao protocolo:",
-            error.message
+            error.message,
           );
         }
       });
@@ -150,7 +150,7 @@ export default {
                 remetente: { id: socket.data.userId },
                 publishedAt: new Date(),
               },
-            }
+            },
           );
 
           console.log("✅ Mensagem salva com sucesso:", newMessage);
@@ -164,14 +164,14 @@ export default {
         console.log(
           `🔌 Usuário ${socket.data.userId || "desconhecido"} desconectado: ${
             socket.id
-          }`
+          }`,
         );
 
         const ProtocoloID = socket.data.ProtocoloID;
         if (ProtocoloID) {
           io.to(ProtocoloID).emit(
             "user_disconnect",
-            socket.data.userStored?.username
+            socket.data.userStored?.username,
           );
           try {
             await strapi.db.query("api::protocolo.protocolo").update({
@@ -182,7 +182,7 @@ export default {
           } catch (error) {
             console.error(
               "❌ Erro ao remover socket ID do protocolo:",
-              error.message
+              error.message,
             );
           }
         }

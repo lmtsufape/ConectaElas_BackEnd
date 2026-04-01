@@ -12,26 +12,24 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "quiz": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::quiz.quiz",
-      "inversedBy": "pontuacao"
-    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "pontuacaos"
     },
-    "total": {
-      "type": "string"
+    "jogo": {
+      "type": "enumeration",
+      "enum": [
+        "quiz",
+        "memoria",
+        "palavracruzada",
+        "cacapalavras"
+      ]
     },
-    "jogo_memorias": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::jogo-memoria.jogo-memoria",
-      "inversedBy": "pontuacaos"
+    "total": {
+      "type": "integer",
+      "required": true
     }
   }
 }

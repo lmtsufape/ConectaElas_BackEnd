@@ -864,10 +864,6 @@ export interface ApiJogoMemoriaJogoMemoria extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::tema-jogo-memoria.tema-jogo-memoria'
     >;
-    pontuacaos: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::pontuacao.pontuacao'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1031,16 +1027,14 @@ export interface ApiPontuacaoPontuacao extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    quiz: Schema.Attribute.Relation<'oneToOne', 'api::quiz.quiz'>;
     users_permissions_user: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-    total: Schema.Attribute.String;
-    jogo_memorias: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::jogo-memoria.jogo-memoria'
+    jogo: Schema.Attribute.Enumeration<
+      ['quiz', 'memoria', 'palavracruzada', 'cacapalavras']
     >;
+    total: Schema.Attribute.Integer & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1151,10 +1145,6 @@ export interface ApiQuizQuiz extends Struct.CollectionTypeSchema {
   attributes: {
     Titulo: Schema.Attribute.String;
     perguntas: Schema.Attribute.Relation<'oneToMany', 'api::pergunta.pergunta'>;
-    pontuacao: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::pontuacao.pontuacao'
-    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
